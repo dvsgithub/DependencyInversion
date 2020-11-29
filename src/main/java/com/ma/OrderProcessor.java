@@ -2,13 +2,17 @@ package com.ma;
 
 public class OrderProcessor {
 
+    private final OrderRepository repository;
+    private final ConfirmationSender confirmationSender;
+
+    public OrderProcessor(OrderRepository repository, ConfirmationSender confirmationSender) {
+        this.repository = repository;
+        this.confirmationSender = confirmationSender;
+    }
+
     public void process(Order order){
-
-        MySQLOrderRepository repository = new MySQLOrderRepository();
-        ConfirmationEmailSender mailSender = new ConfirmationEmailSender();
-
         if (order.isValid() && repository.save(order)) {
-            mailSender.sendConfirmationEmail(order);
+            confirmationSender.sendConfirmation(order);
         }
     }
 

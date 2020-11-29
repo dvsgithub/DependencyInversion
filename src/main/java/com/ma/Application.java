@@ -6,7 +6,10 @@ public class Application {
 
         Order order = new Order("1", "John", "john@email.com", "050 123 45 67");
 
-        OrderProcessor orderProcessor =  new OrderProcessor();
+        OrderRepository orderRepository = new MySQLOrderRepository();
+        ConfirmationSender mailSender = new ConfirmationEmailSender();
+
+        OrderProcessor orderProcessor =  new OrderProcessor(orderRepository, mailSender);
         orderProcessor.process(order);
     }
 
