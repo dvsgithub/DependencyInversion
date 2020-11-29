@@ -19,6 +19,11 @@ public class Application {
         GreetingService greetingService = applicationContext.getBean(GreetingService.class);
 
         System.out.println(greetingService.sayGreeting());
+
+
+        Printer printer = applicationContext.getBean(Printer.class);
+
+        printer.printMessage();
     }
 
 }
