@@ -9,14 +9,12 @@ public class Application {
 
         Order order = new Order("1", "John", "john@email.com", "050 123 45 67");
 
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(JavaAnnotationConfiguration.class);
 
-        OrderProcessor orderProcessor = (OrderProcessor) context.getBean("OrderProcessor");
+        OrderProcessor orderProcessor = (OrderProcessor) applicationContext.getBean("OrderProcessor");
 
         orderProcessor.process(order);
 
-
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(JavaAnnotationConfiguration.class);
 
         GreetingService greetingService = applicationContext.getBean(GreetingService.class);
 
