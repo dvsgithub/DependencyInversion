@@ -8,8 +8,9 @@ public class Application {
 
         OrderRepository orderRepository = new MySQLOrderRepository();
         ConfirmationSender mailSender = new ConfirmationEmailSender();
+        ConfirmationSmsSender smsSender = new ConfirmationSmsSender();
 
-        OrderProcessor orderProcessor =  new OrderProcessor(orderRepository, mailSender);
+        OrderProcessor orderProcessor =  new OrderProcessor(orderRepository, smsSender);
         orderProcessor.process(order);
     }
 
