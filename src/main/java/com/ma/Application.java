@@ -1,5 +1,6 @@
 package com.ma;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Application {
@@ -13,6 +14,13 @@ public class Application {
         OrderProcessor orderProcessor = (OrderProcessor) context.getBean("OrderProcessor");
 
         orderProcessor.process(order);
+
+
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(JavaAnnotationConfiguration.class);
+
+        GreetingService greetingService = applicationContext.getBean(GreetingService.class);
+
+        System.out.println(greetingService.sayGreeting());
     }
 
 }
