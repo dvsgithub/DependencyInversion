@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+    <bean id="MySQLOrderRepository" class="com.ma.MySQLOrderRepository"/>
+    <bean id="ConfirmationEmailSender" class="com.ma.ConfirmationEmailSender"/>
+    <bean id="ConfirmationSmsSender" class="com.ma.ConfirmationSmsSender"/>
+
+    <bean id="OrderProcessor" class="com.ma.OrderProcessor">
+        <constructor-arg ref="ConfirmationEmailSender" />
+        <constructor-arg ref="MySQLOrderRepository" />
+    </bean>
+
+</beans>

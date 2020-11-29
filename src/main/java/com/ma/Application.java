@@ -1,16 +1,17 @@
 package com.ma;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class Application {
 
     public static void main(String[] args) {
 
         Order order = new Order("1", "John", "john@email.com", "050 123 45 67");
 
-        OrderRepository orderRepository = new MySQLOrderRepository();
-        ConfirmationSender mailSender = new ConfirmationEmailSender();
-        ConfirmationSmsSender smsSender = new ConfirmationSmsSender();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
 
-        OrderProcessor orderProcessor =  new OrderProcessor(orderRepository, smsSender);
+        OrderProcessor orderProcessor = (OrderProcessor) context.getBean("OrderProcessor");
+
         orderProcessor.process(order);
     }
 
