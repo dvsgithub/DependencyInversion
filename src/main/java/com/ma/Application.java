@@ -2,6 +2,8 @@ package com.ma;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 public class Application {
 
@@ -24,6 +26,15 @@ public class Application {
         Printer printer = applicationContext.getBean(Printer.class);
 
         printer.printMessage();
+
+
+        String jsonUrl = "https://jsonplaceholder.typicode.com/todos/1";
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(jsonUrl, String.class);
+
+        System.out.println("Response: " + response.getBody());
+
     }
 
 }
